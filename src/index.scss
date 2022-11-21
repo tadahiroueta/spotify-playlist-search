@@ -1,0 +1,73 @@
+// Spotify font
+@font-face {
+  font-family: 'Circular';
+  src: url(./fonts/CircularStd-Book.otf) format('otf');
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: "Circular";
+  src: url(./fonts/CircularStd-BookItalic.otf) format("otf");
+  font-weight: lighter;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: local('Circular'), url(./fonts/CircularStd-Medium.otf) format('otf');
+}
+
+@font-face {
+  font-family: "Circular";
+  src: url(./fonts/CircularStd-MediumItalic.otf) format("otf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url(./fonts/CircularStd-Bold.otf) format('otf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Circular";
+  src: url(./fonts/CircularStd-BoldItalic.otf) format("otf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url(./fonts/CircularStd-Black.otf) format('otf');
+  font-weight: bolder;
+}
+
+@font-face {
+  font-family: "Circular";
+  src: url(./fonts/CircularStd-BlackItalic.otf) format("otf");
+  font-weight: bolder;
+  font-style: italic;
+}
+
+// default
+body {
+  margin: 0;
+  font-family: "Circular", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: rgb(56, 56, 56);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
