@@ -7,9 +7,9 @@ const Spotify = {
     getAccessToken() {
         if (accessToken) return accessToken
         
-        const match = window.location.href.match
-        const accessTokenMatch = match(/access_token=([^&]*)/)
-        const expiresInMatch = match(/expires_in=([^&]*)/)
+        const href = window.location.href
+        const accessTokenMatch = href.match(/access_token=([^&]*)/)
+        const expiresInMatch = href.match(/expires_in=([^&]*)/)
 
         if (accessTokenMatch && expiresInMatch) {
             accessToken = accessTokenMatch[1];
@@ -48,12 +48,10 @@ const Spotify = {
             .then(jsonResponse => {
 
                 const tracks = jsonResponse.tracks
-                return tracks ? tracks.items.map(track => ({
-                    id: track.id,
+                return tracks ? tracks.items.slice(0, 5).map(track => ({
                     name: track.name,
                     artist: track.artists[0].name,
-                    album: track.album.name,
-                    uri: track.uri
+                    cover: track.album.images[0].url,
                 })) : []
 })}}
 
