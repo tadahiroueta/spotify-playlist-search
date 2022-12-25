@@ -1,5 +1,5 @@
-const CLIENT_ID = 'ad690788d09d4d73b9576bcadb4ce7c6'
-const REDIRECT_URI = "process.env.PUBLIC_URL"
+const CLIENT_ID = '78f6632a92254410b635991b3c0c32a5'
+const REDIRECT_URI = "http://localhost:3000/"
 
 let accessToken
 
