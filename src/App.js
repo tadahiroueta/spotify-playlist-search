@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-
 import Spotify from './Spotify';
 
 const PLAYLIST_PLACEHOLDER = { name: "", cover: "cover-placeholder.jpg" }
