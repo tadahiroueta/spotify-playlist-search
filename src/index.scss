@@ -90,16 +90,19 @@ body {
       height: 55vh;
       display: flex;
 
-      .Album {
+      .Playlist {
         margin: 0 10% 0 5%;
 
-        .Album-cover {
+        .Playlist-cover {
           height: 15rem;
+          width: 15rem;
+          object-fit: cover;
         }
 
-        .Album-title {
+        .Playlist-title {
           text-align: center;
           font-weight: normal;
+          font-size: 1.5rem;
       }}
 
       .Search {
@@ -146,6 +149,9 @@ body {
 
             .Song-text {
               float: left;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
 
               .Song-name {
                 margin: 0 0 .5rem;

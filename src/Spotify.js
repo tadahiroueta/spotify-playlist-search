@@ -1,9 +1,17 @@
 const CLIENT_ID = '78f6632a92254410b635991b3c0c32a5'
-const REDIRECT_URI = "http://localhost:3000/"
+const REDIRECT_URI = "http://localhost:3000/" // change when deploying
 
-let accessToken
+let accessToken, playlists
+
+const delay = async (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
 const Spotify = {
+
+    /**
+     * Fetches access token from Spotify API or returns existing token
+     * 
+     * @returns {string} access token
+     */
     getAccessToken() {
         if (accessToken) return accessToken
         
@@ -26,19 +34,41 @@ const Spotify = {
             window.location = accessUrl;
     }},
 
-    getPlaylists() {
-        const accessToken = Spotify.getAccessToken();
-        return fetch('https://api.spotify.com/v1/me/playlists', { headers: { Authorization: `Bearer ${accessToken}`}})
-            .then(response => response.json())
-            .then(jsonResponse => {
+    /**
+     * Fetches all playlists made by user
+     * 
+     * @returns {Promise<Array>} array of playlist ids
+     */
+    async getPlaylists() {
+        if (playlists) return playlists
 
-                const playlists = jsonResponse.items
-                return playlists ? playlists.map(playlist => { return {
-                    name: playlist.name, 
-                    cover: playlist.images[0].url, 
-                    songs: playlist.tracks.map(song => song.name)
-                }}) : []
-    })},
+        const accessToken = Spotify.getAccessToken();
+        playlists = await fetch('https://api.spotify.com/v1/me/playlists?limit=50', { headers: { Authorization: `Bearer ${accessToken}`}})
+            .then(response => response.json())
+
+        playlists = await Promise.all(playlists.items.map(async item => {
+            await delay(1000)
+            const songs = await Spotify.getSongs(item.id)
+            return {
+                name: item.name,
+                cover: item.images[0].url,
+                songs: songs
+        }}))
+        return playlists
+    },
+
+    /**
+     * Fetches only useful data from playlist
+     * 
+     * @param {string} playlistId
+     * @returns {Promise<Array>} names of songs in the playlist
+     */
+    getSongs(playlistId) {
+        const accessToken = Spotify.getAccessToken();
+        return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, { headers: { Authorization: `Bearer ${accessToken}`}})
+            .then(response => response.json())
+            .then(jsonResponse => jsonResponse.items.map(item => item.track.name))
+    },
 
     searchSong(term) {
         const accessToken = Spotify.getAccessToken();

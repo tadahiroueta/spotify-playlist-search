@@ -2,12 +2,13 @@ import { useState } from 'react';
 
 import Spotify from './Spotify';
 
+const PLAYLIST_PLACEHOLDER = { name: "", cover: "cover-placeholder.jpg" }
+
 function App() {
-  const [album, setAlbum] = useState({ name: "", cover: "album-cover-placeholder.jpg" })
+  const [playlist, setPlaylist] = useState(PLAYLIST_PLACEHOLDER)
   const [searchTerm, setSearchTerm] = useState("")
   const [searchResults, setSearchResults] = useState([])
 
-  const playlists = Spotify.getPlaylists()
 
   /**
    * Tries to find the cover of a playlist that includes the song
@@ -16,17 +17,21 @@ function App() {
    * @param {Object} song -- top result from search
    * @returns {string} href of playlist cover image
    */
-  const searchPlaylist = (playlists, searchSong) => { for (const playlist of playlists) if (playlist.find(song => searchSong.name === song.name)) return playlist }
+  const searchPlaylist = async (songName) => { 
+    for (const playlist of await Spotify.getPlaylists()) if (playlist.songs.find(song => songName === song)) {
+      setPlaylist(playlist)
+      return
+    }
+    setPlaylist(PLAYLIST_PLACEHOLDER)
+   }
 
-  const search = (input) => {
+  const search = async () => {
     // search for song
-    input.preventDefault()
-    setSearchTerm(input)
-    setSearchResults(Spotify.searchSong(searchTerm))
-    
+    const results = await Spotify.searchSong(searchTerm)
+    setSearchResults(results)
+
     // find playlist
-    const topResult = searchResults[0]
-    setAlbum(searchPlaylist(playlists, topResult))
+    searchPlaylist(results[0].name)
   }
 
   return (
@@ -39,23 +44,23 @@ function App() {
 
       <div className="Body">
         
-        <div className='Album'>
-          <img className="Album-cover" src={process.env.PUBLIC_URL + album.cover} alt="album cover" />
-          <h4 className="Album-title">{album.name}</h4>
+        <div className='Playlist'>
+          <img className="Playlist-cover" src={process.env.PUBLIC_URL + playlist.cover} alt="playlist cover" />
+          <h4 className="Playlist-title">{playlist.name}</h4>
         </div>
 
         <div className="Search">
           
           <div className='Search-bar'>
-            <img className='Magnifying-glass' src={process.env.PUBLIC_URL + "magnifying-glass.png"} alt="magnifying glass" />
-            <input className='Search-input' type='text' placeholder="Search" value={searchTerm} onChange={ e => search(e.target.value) } />
+            <img className='Magnifying-glass' src={process.env.PUBLIC_URL + "magnifying-glass.png"} alt="magnifying glass" onClick={search} />
+            <input className='Search-input' type='text' placeholder="Search" value={searchTerm} onChange={ e => setSearchTerm(e.target.value) } onKeyUp={({ key }) => { if (key === "Enter") search() }} />
           </div>
 
           {searchResults.length > 0 ? (
             <div className="Search-results">
               {searchResults.map(result => (
 
-                <div className='Search-result' key={result.name}>
+                <div className='Search-result' key={JSON.stringify(result)}>
                   <img className='Song-cover' src={process.env.PUBLIC_URL + result.cover} alt="song cover" />
 
                   <div className='Song-text'>
