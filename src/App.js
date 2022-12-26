@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { isMobile } from 'react-device-detect';
+
 
 import Spotify from './Spotify';
 
@@ -75,7 +77,16 @@ function App() {
       </div>
 
       <footer className='Footer'>
-        <p className="Footer-text">Find your personal playlist by searching for a song in it&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;by Tadahiro Ueta&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;tadahiroueta@gmail.com</p>
+        { isMobile ? 
+          <p className="Footer-text">
+            Find your personal playlist by searching for a song in it<br /><br />
+            by Tadahiro Ueta <br /><br />
+            tadahiroueta@gmail.com
+          </p> : 
+          <p className="Footer-text">
+            "Find your personal playlist by searching for a song in it&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;by Tadahiro Ueta&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;tadahiroueta@gmail.com"
+          </p> 
+        }
       </footer>
     </div>
 )}
