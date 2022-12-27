@@ -106,21 +106,22 @@ body {
       height: 55vh;
       display: flex;
 
-      .Playlist {
+      .Playlist-link {
         margin: 0 10% 0 5%;
+        
+        .Playlist {
+          .Playlist-cover {
+            height: 15rem;
+            width: 15rem;
+            object-fit: cover;
+          }
 
-        .Playlist-cover {
-          height: 15rem;
-          width: 15rem;
-          object-fit: cover;
-        }
-
-        .Playlist-title {
-          text-align: center;
-          font-weight: normal;
-          font-size: 1.5rem;
-          color: white;
-      }}
+          .Playlist-title {
+            text-align: center;
+            font-weight: normal;
+            font-size: 1.5rem;
+            color: white;
+      }}}
 
       .Search {
         $grey: rgb(179, 179, 179);
@@ -141,7 +142,7 @@ body {
           }
 
           .Search-input {
-            margin: .22rem 0 0 0;
+            margin: .1rem 0 0 0;
             border: none;
             height: 100%;
             width: 85%;

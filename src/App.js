@@ -45,7 +45,7 @@ function App() {
 
       <div className="Body">
         
-        <a href={playlist.link}>
+        <a className="Playlist-link" href={playlist.link}>
           <div className="Playlist">
             <img className="Playlist-cover" src={process.env.PUBLIC_URL + playlist.cover} alt="playlist cover" />
             <h4 className="Playlist-title">{playlist.name}</h4>
