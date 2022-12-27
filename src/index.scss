@@ -216,17 +216,18 @@ body {
         height: 100%;
         display: block;
 
-        .Playlist {
+        .Playlist-link {
           margin: 0 10% 5vh;
 
-          .Playlist-cover {
-            width: 100%;
-            height: auto;
-          }
+          .Playlist {
+            .Playlist-cover {
+              width: 100%;
+              height: auto;
+            }
 
-          .Playlist-title {
-            margin: 2.5vh 0 0;
-        }}
+            .Playlist-title {
+              margin: 2.5vh 0 0;
+        }}}
 
         .Search {
           margin: 0 0 15vh;
