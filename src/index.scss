@@ -188,6 +188,7 @@ body {
 
       .Header {
         height: 5vh;
+        margin: 0 0 5vh;
       }
 
       .Body {
@@ -220,6 +221,16 @@ body {
               margin: .5rem 0;
               font-size: 1.5rem;
           }}
+
+          .Search-results {
+            .Search-result {
+              .Song-text {
+                .Song-name {
+                  margin: 0 0 .3rem;
+                }
+              }
+            }
+          }
 
           .Not-found {
             margin: 0 0 25vh;
