@@ -52,7 +52,8 @@ const Spotify = {
             return {
                 name: item.name,
                 cover: item.images[0].url,
-                songs: songs
+                songs: songs,
+                link: item.external_urls.spotify
         }}))
         return playlists
     },

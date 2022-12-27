@@ -3,7 +3,7 @@ import { isMobile } from 'react-device-detect';
 
 import Spotify from './Spotify';
 
-const PLAYLIST_PLACEHOLDER = { name: "", cover: "cover-placeholder.jpg" }
+const PLAYLIST_PLACEHOLDER = { name: "", cover: "cover-placeholder.jpg", link: "https://playlist.tadahiroueta.com/" }
 
 function App() {
   const [playlist, setPlaylist] = useState(PLAYLIST_PLACEHOLDER)
@@ -45,10 +45,12 @@ function App() {
 
       <div className="Body">
         
-        <div className='Playlist'>
-          <img className="Playlist-cover" src={process.env.PUBLIC_URL + playlist.cover} alt="playlist cover" />
-          <h4 className="Playlist-title">{playlist.name}</h4>
-        </div>
+        <a href={playlist.link}>
+          <div className="Playlist">
+            <img className="Playlist-cover" src={process.env.PUBLIC_URL + playlist.cover} alt="playlist cover" />
+            <h4 className="Playlist-title">{playlist.name}</h4>
+          </div>
+        </a>
 
         <div className="Search">
           
