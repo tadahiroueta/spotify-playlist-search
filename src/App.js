@@ -85,7 +85,7 @@ function App() {
             tadahiroueta@gmail.com
           </p> : 
           <p className="Footer-text">
-            "Find your personal playlist by searching for a song in it&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;by Tadahiro Ueta&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;tadahiroueta@gmail.com"
+            Find your personal playlist by searching for a song in it&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;by Tadahiro Ueta&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;tadahiroueta@gmail.com
           </p> 
         }
       </footer>
